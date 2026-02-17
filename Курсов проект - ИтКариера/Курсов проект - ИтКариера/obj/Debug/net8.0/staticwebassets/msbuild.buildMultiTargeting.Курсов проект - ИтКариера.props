@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Курсов проект - ИтКариера.props" />
+</Project>

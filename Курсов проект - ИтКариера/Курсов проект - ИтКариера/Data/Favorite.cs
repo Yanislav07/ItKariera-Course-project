@@ -2,11 +2,11 @@
 {
     public class Favorite
     {
-        public long UserId { get; set; }
-        public User User { get; set; } = null!;
+        public string UserId { get; set; }
+        public User User { get; set; }
 
-        public long BookId { get; set; }
-        public Book Book { get; set; } = null!;
+        public int BookId { get; set; }
+        public Book Book { get; set; }
     }
 
 }
