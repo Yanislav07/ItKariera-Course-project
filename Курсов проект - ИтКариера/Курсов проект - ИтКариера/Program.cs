@@ -57,19 +57,9 @@ app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    string[] roleNames = { "Admin", "Moderator", "User" };
-
-    foreach (var roleName in roleNames)
-    {
-        var roleExist = await roleManager.RoleExistsAsync(roleName);
-        if (!roleExist)
-        {
-            // Create the roles and seed them to the database
-            await roleManager.CreateAsync(new IdentityRole(roleName));
-        }
-    }
+    var services = scope.ServiceProvider;
+    await DbSeeder.SeedRolesAsync(services);
+    await DbSeeder.SeedAdminAsync(services);
 }
 
 app.Run();
