@@ -56,12 +56,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Yanis/Documents/За училище/11 клас/ItKarietra/ItKariera---/Курсов проект - ИтКариера/Курсов проект - ИтКариера/Views/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yanis/Documents/За училище/11 клас/ItKarietra/ItKariera---/Курсов проект - ИтКариера/Курсов проект - ИтКариера/Views/Home/Catalogue.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXRhbG9ndWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Yanis/Documents/За училище/11 клас/ItKarietra/ItKariera---/Курсов проект - ИтКариера/Курсов проект - ИтКариера/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Yanis/Documents/За училище/11 клас/ItKarietra/ItKariera---/Курсов проект - ИтКариера/Курсов проект - ИтКариера/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yanis/Documents/За училище/11 клас/ItKarietra/ItKariera---/Курсов проект - ИтКариера/Курсов проект - ИтКариера/Views/Moderator/AddNewBook.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kZXJhdG9yXEFkZE5ld0Jvb2suY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Yanis/Documents/За училище/11 клас/ItKarietra/ItKariera---/Курсов проект - ИтКариера/Курсов проект - ИтКариера/Views/Shared/Error.cshtml]
