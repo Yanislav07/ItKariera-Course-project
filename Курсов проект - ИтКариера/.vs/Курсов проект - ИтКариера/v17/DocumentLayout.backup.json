@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Yanis\\Documents\\\u0417\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\ItKarietra\\ItKariera---\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0027A64B-EC64-4537-9039-BBAC5763DC9A}|\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430.csproj|c:\\users\\yanis\\documents\\\u0437\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\itkarietra\\itkariera---\\\u043A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0438\u0442\u043A\u0430\u0440\u0438\u0435\u0440\u0430\\\u043A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0438\u0442\u043A\u0430\u0440\u0438\u0435\u0440\u0430\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0027A64B-EC64-4537-9039-BBAC5763DC9A}|\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430.csproj|solutionrelative:\u043A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0438\u0442\u043A\u0430\u0440\u0438\u0435\u0440\u0430\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Yanis\\Documents\\\u0417\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\ItKarietra\\ItKariera---\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Migrations\\20260217142548_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Migrations\\20260217142548_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Yanis\\Documents\\\u0417\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\ItKarietra\\ItKariera---\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Data\\Migrations\\20260217142343_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Data\\Migrations\\20260217142343_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0027A64B-EC64-4537-9039-BBAC5763DC9A}|\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430.csproj|c:\\users\\yanis\\documents\\\u0437\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\itkarietra\\itkariera---\\\u043A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0438\u0442\u043A\u0430\u0440\u0438\u0435\u0440\u0430\\\u043A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0438\u0442\u043A\u0430\u0440\u0438\u0435\u0440\u0430\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0027A64B-EC64-4537-9039-BBAC5763DC9A}|\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430.csproj|solutionrelative:\u043A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0438\u0442\u043A\u0430\u0440\u0438\u0435\u0440\u0430\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0027A64B-EC64-4537-9039-BBAC5763DC9A}|\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430.csproj|c:\\users\\yanis\\documents\\\u0437\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\itkarietra\\itkariera---\\\u043A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0438\u0442\u043A\u0430\u0440\u0438\u0435\u0440\u0430\\\u043A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0438\u0442\u043A\u0430\u0440\u0438\u0435\u0440\u0430\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -66,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -86,7 +86,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "20260217142548_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Yanis\\Documents\\\u0417\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\ItKarietra\\ItKariera---\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Migrations\\20260217142548_InitialCreate.cs",
               "RelativeDocumentMoniker": "\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Migrations\\20260217142548_InitialCreate.cs",
@@ -99,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "20260217142343_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Yanis\\Documents\\\u0417\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\ItKarietra\\ItKariera---\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Data\\Migrations\\20260217142343_InitialCreate.cs",
               "RelativeDocumentMoniker": "\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Data\\Migrations\\20260217142343_InitialCreate.cs",
@@ -112,13 +112,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Yanis\\Documents\\\u0417\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\ItKarietra\\ItKariera---\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Program.cs",
               "RelativeDocumentMoniker": "\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Program.cs",
               "ToolTip": "C:\\Users\\Yanis\\Documents\\\u0417\u0430 \u0443\u0447\u0438\u043B\u0438\u0449\u0435\\11 \u043A\u043B\u0430\u0441\\ItKarietra\\ItKariera---\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Program.cs",
               "RelativeToolTip": "\u041A\u0443\u0440\u0441\u043E\u0432 \u043F\u0440\u043E\u0435\u043A\u0442 - \u0418\u0442\u041A\u0430\u0440\u0438\u0435\u0440\u0430\\Program.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAwD8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAwD8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-17T13:15:10.298Z",
               "EditorCaption": ""
