@@ -1,0 +1,58 @@
+﻿@model IEnumerable<UserRoleViewModel>
+
+<div class="container py-4" style="max-width: 860px;">
+    <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr class="border-bottom" style="background-color: #f8f9fa;">
+                        <th class="ps-3 py-3 fw-semibold text-muted small text-uppercase">Email</th>
+                        <th class="py-3 fw-semibold text-muted small text-uppercase">Current Role</th>
+                        <th class="pe-3 py-3 fw-semibold text-muted small text-uppercase text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td class="ps-3 py-3">
+                                    <span class="text-dark">@user.Email</span>
+                                </td>
+                                <td class="py-3">
+                                    @{
+                                        var badgeClass = user.Role switch
+                                        {
+                                            "Admin" => "bg-dark",
+                                            "Moderator" => "bg-primary",
+                                            "Author" => "bg-info",
+                                            _ => "bg-secondary"
+                                        };
+                                    }
+                                    <span class="badge @badgeClass rounded-pill px-3 py-1">
+                                        @user.Role
+                                    </span>
+                                </td>
+                                <td class="pe-3 py-3 text-end">
+                                    <form method="post" asp-action="ChangeRole" class="d-inline">
+                                        <input type="hidden" name="userId" value="@user.UserId" />
+                                        <select name="newRole" class="form-select form-select-sm d-inline-block me-2" style="width: auto;">
+                                            <option value="User" selected="@(user.Role == "User")">User</option>
+                                            <option value="Moderator" selected="@(user.Role == "Moderator")">Moderator</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-outline-dark">Update</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="3" class="text-center py-5">No non-admin users found.</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
