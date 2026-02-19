@@ -38,5 +38,24 @@ namespace Курсов_проект___ИтКариера.Controllers
             var books = await _context.Books.ToListAsync();
             return View(books);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var book = await _context.Books
+                .Include(b => b.BookAuthors)
+                .Include(b => b.BookCategories)
+                    .ThenInclude(bc => bc.Category)
+                .Include(b => b.Reviews)
+                .Include(b => b.Favorites)
+                .FirstOrDefaultAsync(b => b.Id == id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
+        }
+
     }
 }

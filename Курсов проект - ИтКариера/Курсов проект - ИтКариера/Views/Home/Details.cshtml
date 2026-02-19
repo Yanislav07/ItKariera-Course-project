@@ -1,0 +1,55 @@
+﻿@using Курсов_проект___ИтКариера.Data
+@model Book
+
+<div class="container py-4">
+    <h1 class="fw-bold">@Model.Title</h1>
+
+    <p class="text-muted">
+        Published: @Model.PublishedDate.ToString()
+    </p>
+
+    <hr />
+
+    <h4>Description</h4>
+    <p>@Model.Description</p>
+
+    <hr />
+
+    <h4>Authors</h4>
+    <ul>
+        @foreach (var author in Model.BookAuthors)
+        {
+            <li>@author.BookId</li>
+        }
+    </ul>
+
+    <hr />
+
+    <h4>Categories</h4>
+    <ul>
+        @foreach (var category in Model.BookCategories)
+        {
+            <li>@category.Category.Name</li>
+        }
+    </ul>
+
+    <hr />
+
+    <h4>Reviews</h4>
+    @if (Model.Reviews.Any())
+    {
+        @foreach (var review in Model.Reviews)
+        {
+            <div class="border p-2 mb-2">
+                <strong>@review.User.UserName</strong>
+                <p>@review.Comment</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No reviews yet.</p>
+    }
+
+    <a asp-action="Catalogue" class="btn btn-secondary mt-3">Back to Catalogue</a>
+</div>
