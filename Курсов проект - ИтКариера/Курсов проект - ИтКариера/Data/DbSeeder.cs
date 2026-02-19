@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Курсов_проект___ИтКариера.Data
 {
@@ -43,6 +44,32 @@ namespace Курсов_проект___ИтКариера.Data
                     await userManager.AddToRoleAsync(adminUser, "Admin");
                 }
             }
+        }
+
+        public static async Task SeedCategoriesAsync(IServiceProvider service)
+        {
+            var context = service.GetRequiredService<ApplicationDbContext>();
+
+            // Make sure database exists
+            await context.Database.MigrateAsync();
+
+            // If categories already exist → stop
+            if (await context.Categories.AnyAsync())
+                return;
+
+            var categories = new List<Category>
+            {
+                new Category { Name = "Fiction" },
+                new Category { Name = "Mystery" },
+                new Category { Name = "Romance" },
+                new Category { Name = "Programming" },
+                new Category { Name = "Artificial Intelligence" },
+                new Category { Name = "Self help" },
+                new Category { Name = "UI/UX Design" },
+            };
+
+            await context.Categories.AddRangeAsync(categories);
+            await context.SaveChangesAsync();
         }
     }
 }

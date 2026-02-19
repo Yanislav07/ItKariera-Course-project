@@ -1,4 +1,4 @@
-﻿@model BookViewModel
+﻿@model Курсов_проект___ИтКариера.Models.BookViewModel
 
 @{
     ViewData["Title"] = "Add New Book";
@@ -8,67 +8,134 @@
 
     <div class="mb-4">
         <h1 class="h4 fw-semibold text-dark mb-1">Add New Book</h1>
-        <p class="text-muted small mb-0">Fill in the details below to add a book to the catalogue.</p>
+        <p class="text-muted small mb-0">
+            Fill in the details below to add a book to the catalogue.
+        </p>
     </div>
 
     @if (TempData["StatusMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show py-2 small" role="alert">
             @TempData["StatusMessage"]
-            <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button"
+                    class="btn-close btn-close-sm"
+                    data-bs-dismiss="alert"
+                    aria-label="Close">
+            </button>
         </div>
     }
 
     <div class="card border-0 shadow-sm">
         <div class="card-body p-4">
-            <form method="post" asp-action="Create" asp-controller="Moderator">
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3 small"></div>
 
-                <div class="mb-3">
-                    <label asp-for="Book.Title" class="form-label fw-semibold small text-muted text-uppercase" style="letter-spacing: 0.03em;">
-                        Title
-                    </label>
-                    <input asp-for="Book.Title"
-                           class="form-control"
-                           placeholder="Enter the book title"
-                           aria-required="true" />
-                    <span asp-validation-for="Book.Title" class="text-danger small"></span>
+            <form asp-action="AddNewBook" asp-controller="Moderator" method="post">
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3 small">
                 </div>
 
+                <!-- TITLE -->
                 <div class="mb-3">
-                    <label asp-for="Book.Description" class="form-label fw-semibold small text-muted text-uppercase" style="letter-spacing: 0.03em;">
+                    <label asp-for="Book.Title"
+                           class="form-label fw-semibold small text-muted text-uppercase"
+                           style="letter-spacing: 0.03em;">
+                        Title
+                    </label>
+
+                    <input asp-for="Book.Title"
+                           class="form-control"
+                           placeholder="Enter the book title" />
+
+                    <span asp-validation-for="Book.Title"
+                          class="text-danger small"></span>
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="mb-3">
+                    <label asp-for="Book.Description"
+                           class="form-label fw-semibold small text-muted text-uppercase"
+                           style="letter-spacing: 0.03em;">
                         Description
                     </label>
+
                     <textarea asp-for="Book.Description"
                               class="form-control"
                               rows="5"
-                              placeholder="Write a brief description of the book"
-                              aria-required="true"></textarea>
-                    <span asp-validation-for="Book.Description" class="text-danger small"></span>
+                              placeholder="Write a brief description">
+                    </textarea>
+
+                    <span asp-validation-for="Book.Description"
+                          class="text-danger small"></span>
                 </div>
 
-                <div class="mb-4">
-                    <label asp-for="Book.PublishedDate" class="form-label fw-semibold small text-muted text-uppercase" style="letter-spacing: 0.03em;">
+                <!-- PUBLISHED DATE -->
+                <div class="mb-3">
+                    <label asp-for="Book.PublishedDate"
+                           class="form-label fw-semibold small text-muted text-uppercase"
+                           style="letter-spacing: 0.03em;">
                         Publish Date
                     </label>
+
                     <input asp-for="Book.PublishedDate"
                            type="date"
                            class="form-control"
-                           style="max-width: 220px;"
-                           aria-required="true" />
-                    <span asp-validation-for="Book.PublishedDate" class="text-danger small"></span>
+                           style="max-width: 220px;" />
+
+                    <span asp-validation-for="Book.PublishedDate"
+                          class="text-danger small"></span>
                 </div>
 
+                <!-- AUTHORS (Multi Select) -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold small text-muted text-uppercase">
+                        Authors
+                    </label>
+
+                    <select asp-for="SelectedAuthorIds"
+                            asp-items="Model.AuthorList"
+                            class="form-select"
+                            multiple>
+                    </select>
+
+                    <span asp-validation-for="SelectedAuthorIds"
+                          class="text-danger small"></span>
+                </div>
+
+                <!-- CATEGORIES (Multi Select) -->
+                <div class="mb-4">
+                    <label class="form-label fw-semibold small text-muted text-uppercase">
+                        Categories
+                    </label>
+
+                    <select asp-for="SelectedCategoryIds"
+                            asp-items="Model.CategoryList"
+                            class="form-select"
+                            multiple>
+                    </select>
+
+                    <span asp-validation-for="SelectedCategoryIds"
+                          class="text-danger small"></span>
+                </div>
+
+                <!-- BUTTONS -->
                 <div class="border-top pt-3 d-flex justify-content-end gap-2">
-                    <a asp-page="/Index" class="btn btn-sm btn-light px-3">Cancel</a>
-                    <button type="submit" class="btn btn-sm btn-dark px-4">
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="btn btn-sm btn-light px-3">
+                        Cancel
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-sm btn-dark px-4">
                         Add Book
                     </button>
                 </div>
+
             </form>
+
         </div>
     </div>
-
 </div>
 
 @section Scripts {
