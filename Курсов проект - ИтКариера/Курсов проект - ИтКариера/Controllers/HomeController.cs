@@ -43,6 +43,7 @@ namespace Курсов_проект___ИтКариера.Controllers
         {
             var book = await _context.Books
                 .Include(b => b.BookAuthors)
+                    .ThenInclude(ba => ba.User)
                 .Include(b => b.BookCategories)
                     .ThenInclude(bc => bc.Category)
                 .Include(b => b.Reviews)

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8VDF8s+qmuM=",
+  "dgSpecHash": "vz6jEKwLcc8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Yanis\\Documents\\За училище\\11 клас\\ItKarietra\\ItKariera---\\Курсов проект - ИтКариера\\Курсов проект - ИтКариера\\Курсов проект - ИтКариера.csproj",
+  "projectFilePath": "C:\\Users\\Yanis\\Documents\\За училище\\12 клас\\ItKariera\\ItKariera-Course-project\\Курсов проект - ИтКариера\\Курсов проект - ИтКариера\\Курсов проект - ИтКариера.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yanis\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Yanis\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

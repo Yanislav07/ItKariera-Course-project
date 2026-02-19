@@ -60,6 +60,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     await DbSeeder.SeedRolesAsync(services);
     await DbSeeder.SeedAdminAsync(services);
+    await DbSeeder.SeedCategoriesAsync(services);
 }
 
 app.Run();
