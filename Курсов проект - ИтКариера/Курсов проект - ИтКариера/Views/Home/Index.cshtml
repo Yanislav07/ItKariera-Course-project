@@ -1,9 +1,36 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Курсов_проект___ИтКариера.Data
+@model IEnumerable<Book>
+
+@{
+	ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+	@foreach (var book in Model)
+	{
+		<div class="col">
+			<div class="card h-100 border-0 shadow-sm">
+				<div class="card-body">
+					<h5 class="card-title fw-bold">@book.Title</h5>
+					<p class="card-text text-muted" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+						@book.Description
+					</p>
+				</div>
+				<div class="card-footer bg-transparent border-top-0 pb-3">
+					<div class="d-flex justify-content-between align-items-center">
+						<small class="text-muted">Published: @book.PublishedDate.ToString()</small>
+						<a asp-action="Details" asp-route-id="@book.Id" class="btn btn-sm btn-outline-primary">View Details</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
 </div>
+
+@if (!Model.Any())
+{
+	<div class="text-center py-5">
+		<p class="text-muted">No books found in the library yet.</p>
+	</div>
+}
 

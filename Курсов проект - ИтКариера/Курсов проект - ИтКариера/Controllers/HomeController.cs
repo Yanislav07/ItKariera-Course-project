@@ -17,9 +17,10 @@ namespace Курсов_проект___ИтКариера.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var books = await _context.Books.ToListAsync();
+            return View(books);
         }
 
         public IActionResult Privacy()
@@ -37,6 +38,12 @@ namespace Курсов_проект___ИтКариера.Controllers
         {
             var books = await _context.Books.ToListAsync();
             return View(books);
+        }
+
+        //Search Functionality
+        public async Task<IActionResult> ShowSearchResults(string SearchBook)
+        {
+            return View("Index", await _context.Books.Where(j => j.Title != null && j.Title == SearchBook).ToListAsync());
         }
 
         public async Task<IActionResult> Details(int id)
