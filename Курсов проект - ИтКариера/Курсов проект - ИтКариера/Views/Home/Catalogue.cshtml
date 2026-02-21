@@ -1,6 +1,11 @@
 ﻿@using Курсов_проект___ИтКариера.Data
 @model IEnumerable<Book>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
 @{
     ViewData["Title"] = "Library";
 }
@@ -48,4 +53,5 @@
             <p class="text-muted">No books found in the library yet.</p>
         </div>
     }
+
 </div>

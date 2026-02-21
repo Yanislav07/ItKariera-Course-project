@@ -1,6 +1,7 @@
-using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using Курсов_проект___ИтКариера.Data;
 using Курсов_проект___ИтКариера.Models;
 
@@ -63,6 +64,24 @@ namespace Курсов_проект___ИтКариера.Controllers
             }
 
             return View(book);
+        }
+
+        //Book deletion
+        [Authorize(Roles = "Admin,Moderator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var book = await _context.Books.FindAsync(id);
+            if (book == null)
+                return NotFound();
+
+            _context.Books.Remove(book);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Book deleted successfully!";
+
+            return RedirectToAction("Catalogue");
         }
 
     }
