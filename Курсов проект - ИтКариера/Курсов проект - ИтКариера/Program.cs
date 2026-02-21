@@ -12,7 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => {
+builder.Services.AddIdentity<User, IdentityRole<Guid>>(options => {
     options.SignIn.RequireConfirmedAccount = true;
 
     options.Password.RequireDigit = false;
@@ -22,10 +22,12 @@ builder.Services.AddDefaultIdentity<User>(options => {
     options.Password.RequiredLength = 4;
     options.Password.RequiredUniqueChars = 0;
 })
-    .AddRoles<IdentityRole>()
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 

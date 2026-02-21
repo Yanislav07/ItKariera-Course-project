@@ -40,7 +40,7 @@ namespace Курсов_проект___ИтКариера.Controllers
 
                 userRoleList.Add(new UserRoleViewModel
                 {
-                    UserId = user.Id,
+                    UserId = user.Id.ToString(),
                     Email = user.Email,
                     Role = roles.FirstOrDefault()
                 });

@@ -48,7 +48,7 @@ namespace Курсов_проект___ИтКариера.Controllers
             return View("Index", await _context.Books.Where(j => j.Title != null && j.Title == SearchBook).ToListAsync());
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(Guid id)
         {
             var book = await _context.Books
                 .Include(b => b.BookAuthors)
@@ -90,7 +90,7 @@ namespace Курсов_проект___ИтКариера.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddReview(int BookId, double Rating, string Comment)
+        public async Task<IActionResult> AddReview(Guid BookId, double Rating, string Comment)
         {
 
             if (string.IsNullOrWhiteSpace(Comment) || Rating < 0)
@@ -103,7 +103,7 @@ namespace Курсов_проект___ИтКариера.Controllers
             var review = new Review
             {
                 BookId = BookId,
-                UserId = userId,
+                UserId = Guid.Parse(userId),
                 Rating = Rating,
                 Comment = Comment
             };
@@ -127,7 +127,7 @@ namespace Курсов_проект___ИтКариера.Controllers
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (review.UserId != userId &&
+            if (review.UserId != Guid.Parse(userId) &&
                 !User.IsInRole("Admin") &&
                 !User.IsInRole("Moderator"))
             {
@@ -144,10 +144,10 @@ namespace Курсов_проект___ИтКариера.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ToggleFavorite(int BookId)
+        public async Task<IActionResult> ToggleFavorite(Guid BookId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var existing = await _context.Favorites.FirstOrDefaultAsync(f => f.BookId == BookId && f.UserId == userId);
+            var existing = await _context.Favorites.FirstOrDefaultAsync(f => f.BookId == BookId && f.UserId == Guid.Parse(userId));
 
             if (existing != null)
             {
@@ -156,7 +156,7 @@ namespace Курсов_проект___ИтКариера.Controllers
             }
             else
             {
-                _context.Favorites.Add(new Favorite { BookId = BookId, UserId = userId });
+                _context.Favorites.Add(new Favorite { BookId = BookId, UserId = Guid.Parse(userId) });
                 TempData["FavoriteMessage"] = "Book saved to favorites";
             }
 
@@ -171,7 +171,7 @@ namespace Курсов_проект___ИтКариера.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var favoriteBooks = await _context.Favorites
-                .Where(f => f.UserId == userId)
+                .Where(f => f.UserId == Guid.Parse(userId))
                 .Include(f => f.Book)            
                     .ThenInclude(b => b.BookAuthors)   
                 .Include(f => f.Book)

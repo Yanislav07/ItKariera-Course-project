@@ -68,7 +68,7 @@ namespace Курсов_проект___ИтКариера.Controllers
             model.AuthorList = _context.Users
                 .Select(u => new SelectListItem
                 {
-                    Value = u.Id,
+                    Value = u.Id.ToString(),
                     Text = u.UserName
                 }).ToList();
 

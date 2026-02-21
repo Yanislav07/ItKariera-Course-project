@@ -7,14 +7,14 @@ namespace Курсов_проект___ИтКариера.Data
     {
         public static async Task SeedRolesAsync(IServiceProvider service)
         {
-            var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleManager = service.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
             string[] roles = { "Admin", "Moderator", "Author", "User" };
 
             foreach (var roleName in roles)
             {
                 if (!await roleManager.RoleExistsAsync(roleName))
                 {
-                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                    await roleManager.CreateAsync(new IdentityRole<Guid>(roleName));
                 }
             }
         }

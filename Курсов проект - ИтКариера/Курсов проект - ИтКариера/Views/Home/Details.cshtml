@@ -46,7 +46,7 @@
         <form asp-action="ToggleFavorite" asp-controller="Home" method="post" style="display:inline;">
             <input type="hidden" name="BookId" value="@Model.Id" />
             <button type="submit" class="btn btn-warning">
-                @(Model.Favorites.Any(f => f.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)) ? "Remove from Favorites" : "Add to Favorites")
+                @(Model.Favorites.Any(f => f.UserId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))) ? "Remove from Favorites" : "Add to Favorites")
             </button>
         </form>
     }
@@ -103,7 +103,7 @@
                 <p>@review.Comment</p>
 
                 @if (User.Identity.IsAuthenticated &&
-                        (review.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+                        (review.UserId == Guid.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
                         || User.IsInRole("Admin")
                         || User.IsInRole("Moderator")))
                 {
