@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Claims;
 using Курсов_проект___ИтКариера.Data;
 using Курсов_проект___ИтКариера.Models;
 
@@ -55,6 +56,7 @@ namespace Курсов_проект___ИтКариера.Controllers
                 .Include(b => b.BookCategories)
                     .ThenInclude(bc => bc.Category)
                 .Include(b => b.Reviews)
+                    .ThenInclude(r => r.User)
                 .Include(b => b.Favorites)
                 .FirstOrDefaultAsync(b => b.Id == id);
 
@@ -83,6 +85,104 @@ namespace Курсов_проект___ИтКариера.Controllers
 
             return RedirectToAction("Catalogue");
         }
+
+        //Comments Controller
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReview(int BookId, double Rating, string Comment)
+        {
+
+            if (string.IsNullOrWhiteSpace(Comment) || Rating < 0)
+            {
+                return RedirectToAction("Details", new { id = BookId });
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var review = new Review
+            {
+                BookId = BookId,
+                UserId = userId,
+                Rating = Rating,
+                Comment = Comment
+            };
+
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = BookId });
+        }
+
+        //Delete Comment Controller
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteReview(int reviewId, int bookId)
+        {
+            var review = await _context.Reviews.FindAsync(reviewId);
+
+            if (review == null)
+                return NotFound();
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (review.UserId != userId &&
+                !User.IsInRole("Admin") &&
+                !User.IsInRole("Moderator"))
+            {
+                return Forbid();
+            }
+
+            _context.Reviews.Remove(review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = bookId });
+        }
+
+        //Favorites Controller
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ToggleFavorite(int BookId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var existing = await _context.Favorites.FirstOrDefaultAsync(f => f.BookId == BookId && f.UserId == userId);
+
+            if (existing != null)
+            {
+                _context.Favorites.Remove(existing);
+                TempData["FavoriteMessage"] = "Book removed from favorites";
+            }
+            else
+            {
+                _context.Favorites.Add(new Favorite { BookId = BookId, UserId = userId });
+                TempData["FavoriteMessage"] = "Book saved to favorites";
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = BookId });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Favorites()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var favoriteBooks = await _context.Favorites
+                .Where(f => f.UserId == userId)
+                .Include(f => f.Book)            
+                    .ThenInclude(b => b.BookAuthors)   
+                .Include(f => f.Book)
+                    .ThenInclude(b => b.BookCategories) 
+                .Select(f => f.Book)                    
+                .ToListAsync();
+
+            return View(favoriteBooks);
+        }
+    
+
 
     }
 }

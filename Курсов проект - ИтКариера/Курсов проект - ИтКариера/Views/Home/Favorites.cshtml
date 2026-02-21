@@ -1,0 +1,13 @@
+﻿@using Курсов_проект___ИтКариера.Data
+@model IEnumerable<Book>
+
+<h2>Your Favorite Books</h2>
+
+@foreach (var book in Model)
+{
+    <div>
+        <h4>@book.Title</h4>
+        <p>@book.Description</p>
+        <a asp-action="Details" asp-route-id="@book.Id">View</a>
+    </div>
+}

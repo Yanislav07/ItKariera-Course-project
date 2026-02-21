@@ -1,6 +1,14 @@
-﻿@using Курсов_проект___ИтКариера.Data
+﻿@using System.Security.Claims;
+@using Курсов_проект___ИтКариера.Data
 @model Book
 
+@if (TempData["FavoriteMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["FavoriteMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 <div class="container py-4">
     <h1 class="fw-bold">@Model.Title</h1>
 
@@ -33,23 +41,19 @@
         }
     </ul>
 
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-action="ToggleFavorite" asp-controller="Home" method="post" style="display:inline;">
+            <input type="hidden" name="BookId" value="@Model.Id" />
+            <button type="submit" class="btn btn-warning">
+                @(Model.Favorites.Any(f => f.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)) ? "Remove from Favorites" : "Add to Favorites")
+            </button>
+        </form>
+    }
+
+
     <hr />
 
-    <h4>Reviews</h4>
-    @if (Model.Reviews.Any())
-    {
-        @foreach (var review in Model.Reviews)
-        {
-            <div class="border p-2 mb-2">
-                <strong>@review.User.UserName</strong>
-                <p>@review.Comment</p>
-            </div>
-        }
-    }
-    else
-    {
-        <p>No reviews yet.</p>
-    }
 
     @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))
     {
@@ -59,6 +63,73 @@
         </form>
     }
 
+    <h4>Reviews</h4>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-action="AddReview" asp-controller="Home" method="post">
+            <input type="hidden" name="BookId" value="@Model.Id" />
+
+            <div class="mb-2">
+                <label>Rating</label>
+                <select name="Rating" class="form-control">
+                    @for (double i = 0; i <= 5; i+= 0.5)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label>Comment</label>
+                <textarea name="Comment" class="form-control" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+    }
+    else
+    {
+        <p><a asp-controller="Account" asp-action="Login">Login</a> to write a review.</p>
+    }
+
+    @if (Model.Reviews != null && Model.Reviews.Any())
+    {
+        @foreach (var review in Model.Reviews.OrderByDescending(r => r.CreatedAt))
+        {
+            <div class="border p-3 mb-3 rounded">
+                <strong>@review.User?.UserName</strong>
+                <p>Rating: ⭐ @review.Rating.ToString("0.0") / 5</p>
+                <p>@review.Comment</p>
+
+                @if (User.Identity.IsAuthenticated &&
+                        (review.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+                        || User.IsInRole("Admin")
+                        || User.IsInRole("Moderator")))
+                {
+                    <form asp-action="DeleteReview"
+                          asp-controller="Home"
+                          method="post"
+                          style="display:inline;">
+
+                        <input type="hidden" name="reviewId" value="@review.Id" />
+                        <input type="hidden" name="bookId" value="@Model.Id" />
+
+                        <button type="submit"
+                                class="btn btn-danger btn-sm"
+                                onclick="return confirm('Are you sure you want to delete this review?');">
+                            Delete
+                        </button>
+
+                    </form>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p>No reviews yet.</p>
+    }
 
     <a asp-action="Catalogue" class="btn btn-secondary mt-3">Back to Catalogue</a>
 </div>
