@@ -72,7 +72,7 @@ namespace Курсов_проект___ИтКариера.Controllers
         [Authorize(Roles = "Admin,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var book = await _context.Books.FindAsync(id);
             if (book == null)
@@ -118,7 +118,7 @@ namespace Курсов_проект___ИтКариера.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteReview(int reviewId, int bookId)
+        public async Task<IActionResult> DeleteReview(Guid reviewId, Guid bookId)
         {
             var review = await _context.Reviews.FindAsync(reviewId);
 
