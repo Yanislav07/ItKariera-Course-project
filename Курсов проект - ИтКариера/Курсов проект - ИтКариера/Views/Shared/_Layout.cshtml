@@ -1,86 +1,333 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - BookNook</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/Курсов_проект___ИтКариера.styles.css" asp-append-version="true" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookTalk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Курсов_проект___ИтКариера.styles.css" asp-append-version="true" />
+
+    <style>
+        :root {
+            --bg: #F8F3EE;
+            --bg-alt: #EFE6DB;
+            --border: #D4C4B5;
+            --primary: #6B3F22;
+            --text: #1C0F07;
+            --text-2: #5A3D28;
+            --text-3: #9C8070;
+            --white: #FFFCF9;
+            --shadow-sm: 0 1px 6px rgba(80,40,10,0.07);
+            --shadow-md: 0 8px 32px rgba(80,40,10,0.13);
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Jost', sans-serif;
+            --r: 6px;
+            --tr: 0.22s cubic-bezier(.4,0,.2,1);
+            --nav-h: 68px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            margin: 0;
+        }
+
+        /* ── Navbar ─────────────────────────────────── */
+        .bt-navbar {
+            background: var(--white) !important;
+            border-bottom: 1px solid var(--border) !important;
+            box-shadow: var(--shadow-sm);
+            height: var(--nav-h);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 1rem;
+            /* remove bootstrap default margin */
+            margin-bottom: 0 !important;
+        }
+
+            .bt-navbar .container-fluid {
+                height: var(--nav-h);
+                display: flex;
+                align-items: center;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 1.5rem;
+            }
+
+        /* Brand */
+        .bt-brand {
+            font-family: var(--font-display) !important;
+            font-size: 1.55rem !important;
+            font-weight: 600 !important;
+            color: var(--text) !important;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: opacity var(--tr);
+            margin-right: 2rem;
+        }
+
+            .bt-brand:hover {
+                opacity: 0.65;
+            }
+
+        /* Center nav links */
+        .bt-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.15rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            .bt-nav-links .nav-link {
+                font-family: var(--font-body) !important;
+                font-size: 0.93rem !important;
+                font-weight: 400 !important;
+                color: var(--text) !important;
+                padding: 0.35rem 0.8rem !important;
+                border-radius: var(--r);
+                text-decoration: none;
+                position: relative;
+                transition: color var(--tr);
+            }
+
+                .bt-nav-links .nav-link::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 2px;
+                    left: 0.8rem;
+                    right: 0.8rem;
+                    height: 1.5px;
+                    background: var(--text);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform var(--tr);
+                }
+
+                .bt-nav-links .nav-link:hover::after {
+                    transform: scaleX(1);
+                }
+
+        /* Search */
+        .bt-search-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .bt-search-icon {
+            position: absolute;
+            left: 11px;
+            color: var(--text-3);
+            pointer-events: none;
+            width: 15px;
+            height: 15px;
+        }
+
+        .bt-search-input {
+            height: 38px;
+            padding: 0 1rem 0 2.1rem;
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            color: var(--text);
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            width: 210px;
+            outline: none;
+            transition: border-color var(--tr), box-shadow var(--tr), width var(--tr), background var(--tr);
+        }
+
+            .bt-search-input::placeholder {
+                color: var(--text-3);
+            }
+
+            .bt-search-input:focus {
+                border-color: var(--text);
+                background: var(--white);
+                box-shadow: 0 0 0 3px rgba(28,15,7,0.07);
+                width: 250px;
+            }
+
+        /* Login partial link overrides */
+        .bt-right-section a,
+        .bt-right-section .nav-link,
+        .bt-right-section .btn-link {
+            font-family: var(--font-body) !important;
+            font-size: 0.9rem !important;
+            color: var(--text) !important;
+            text-decoration: none;
+        }
+
+            .bt-right-section a:hover {
+                color: var(--text-2) !important;
+            }
+
+            /* Register / primary action button in login partial */
+            .bt-right-section .btn-primary,
+            .bt-right-section a.btn-primary {
+                background: var(--text) !important;
+                border-color: var(--text) !important;
+                color: var(--white) !important;
+                font-family: var(--font-body) !important;
+                font-size: 0.86rem !important;
+                font-weight: 500 !important;
+                padding: 0.45rem 1.1rem !important;
+                border-radius: var(--r) !important;
+                text-decoration: none;
+                transition: background var(--tr), transform var(--tr);
+            }
+
+                .bt-right-section .btn-primary:hover,
+                .bt-right-section a.btn-primary:hover {
+                    background: var(--primary) !important;
+                    border-color: var(--primary) !important;
+                    transform: translateY(-1px);
+                }
+
+        /* Mobile toggler */
+        .navbar-toggler {
+            border: 1px solid var(--border) !important;
+            border-radius: var(--r) !important;
+        }
+
+            .navbar-toggler:focus {
+                box-shadow: 0 0 0 3px rgba(107,63,34,0.18) !important;
+            }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231C0F07' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        /* ── Main content area ──────────────────────── */
+        .bt-main-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        main {
+            animation: btFadeUp 0.38s ease both;
+        }
+
+        @@keyframes btFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Footer ─────────────────────────────────── */
+        .footer {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-3) !important;
+            border-color: var(--border) !important;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
-	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-			<div class="container-fluid">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ИтКариера - BookNook</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Catalogue">Catalogue</a>
-						</li>
-						<li class="nav-item">
-							@if (User.Identity.IsAuthenticated)
-							{
-								<a class="nav-link text-dark" asp-controller="Home" asp-action="Favorites">Favorites</a>
-							}
-							else
-							{
-								<a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Favorites</a>
-							}
-						</li>
 
-						@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))
-						{
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Moderator" asp-action="AddNewBook">Add a book</a>
-							</li>
-						}
+    <header>
+        <nav class="navbar navbar-expand-md bt-navbar">
+            <div class="container-fluid">
 
-						@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-						{
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">Admin Dashboard</a>
-							</li>
-						}
+                <!-- Brand -->
+                <a class="navbar-brand bt-brand" asp-area="" asp-controller="Home" asp-action="Index">BookTalk</a>
 
-						<form asp-action="ShowSearchResults" class="d-flex align-items-end ms-3">
-							<div class="form-group me-2">
-								<input name="SearchBook" class="form-control" placeholder="Search Books" />
-							</div>
-							<div class="form-group">
-								<input type="submit" value="Search" class="btn btn-primary" />
-							</div>
-						</form>
-					</ul>
-					<partial name="_LoginPartial" />
-				</div>
-			</div>
-		</nav>
-	</header>
-	<div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div>
+                <!-- Mobile toggler -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-	<footer class="border-top footer text-muted mt-auto py-3">
-		<div class="container">
-			&copy; 2026 - ИтКариера - BookNook - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-		</div>
-	</footer>
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
-	@await RenderSectionAsync("Scripts", required: false)
+                <div class="navbar-collapse collapse d-md-flex align-items-center justify-content-between">
+
+                    <!-- Center: nav links -->
+                    <ul class="navbar-nav bt-nav-links mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Catalogue">Catalogue</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link" asp-controller="Home" asp-action="Favorites">Favorites</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Favorites</a>
+                            }
+                        </li>
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Moderator" asp-action="AddNewBook">Add a book</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Dashboard">Admin Dashboard</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- Right: search + login -->
+                    <div class="d-flex align-items-center gap-3 bt-right-section">
+                        <form asp-action="ShowSearchResults" class="m-0">
+                            <div class="bt-search-wrap">
+                                <svg class="bt-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                </svg>
+                                <input name="SearchBook" class="bt-search-input" placeholder="Search books..." />
+                            </div>
+                        </form>
+                        <partial name="_LoginPartial" />
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container bt-main-wrap flex-grow-1">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-auto py-3">
+        <div class="container">
+            &copy; 2026 - BookTalk
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,42 +1,313 @@
 ﻿@using Курсов_проект___ИтКариера.Data
 @model IEnumerable<Book>
-
 @{
-	ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="col">
-	<h1>Library</h1>
-	<hr />
-	<p>Browse the catalogue</p>
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Jost:wght@300;400;500&display=swap');
+
+    :root {
+        --bg: #F8F3EE;
+        --bg-alt: #EFE6DB;
+        --border: #D4C4B5;
+        --primary: #6B3F22;
+        --text: #1C0F07;
+        --text-2: #5A3D28;
+        --text-3: #9C8070;
+        --white: #FFFCF9;
+        --shadow-sm: 0 1px 6px rgba(80,40,10,0.07);
+        --shadow-md: 0 8px 32px rgba(80,40,10,0.13);
+        --font-display: 'Playfair Display', Georgia, serif;
+        --font-body: 'Jost', sans-serif;
+        --r: 6px;
+        --tr: 0.22s cubic-bezier(.4,0,.2,1);
+    }
+
+    body {
+        font-family: var(--font-body);
+        background: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Hero ───────────────────────────────────── */
+    .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: center;
+        padding: 5rem 0 4.5rem;
+    }
+
+    @@media (max-width: 767px) {
+        .hero {
+            grid-template-columns: 1fr;
+            padding: 2.5rem 0;
+        }
+
+        .hero-image {
+            order: -1;
+        }
+    }
+
+    .hero-eyebrow {
+        font-family: var(--font-body);
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-3);
+        margin: 0 0 0.75rem;
+    }
+
+    .hero-heading {
+        font-family: var(--font-display);
+        font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+        font-weight: 600;
+        line-height: 1.08;
+        color: var(--text);
+        margin: 0 0 1.25rem;
+    }
+
+    .hero-sub {
+        font-size: 1rem;
+        color: var(--text-2);
+        line-height: 1.75;
+        max-width: 420px;
+        margin: 0 0 2rem;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 0.85rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-hero-dark {
+        font-family: var(--font-body);
+        font-size: 0.88rem;
+        font-weight: 500;
+        padding: 0.7rem 1.5rem;
+        background: var(--text);
+        color: var(--white);
+        border: none;
+        border-radius: var(--r);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: background var(--tr), transform var(--tr), box-shadow var(--tr);
+        cursor: pointer;
+    }
+
+        .btn-hero-dark:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+    .btn-hero-ghost {
+        font-family: var(--font-body);
+        font-size: 0.88rem;
+        font-weight: 500;
+        padding: 0.7rem 1.5rem;
+        background: transparent;
+        color: var(--text);
+        border: 1.5px solid var(--border);
+        border-radius: var(--r);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: border-color var(--tr), transform var(--tr);
+    }
+
+        .btn-hero-ghost:hover {
+            border-color: var(--text);
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+
+    .hero-image {
+        border-radius: var(--r);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        aspect-ratio: 4/3;
+    }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.03);
+        }
+
+    /* ── Library section ────────────────────────── */
+    .section-header {
+        padding-top: 3rem;
+        border-top: 1px solid var(--border);
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.25rem;
+    }
+
+    .section-rule {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 0.6rem 0;
+    }
+
+    .section-sub {
+        color: var(--text-3);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    /* ── Book cards ─────────────────────────────── */
+    .book-card {
+        background: var(--white);
+        border: 1px solid var(--border) !important;
+        border-radius: var(--r) !important;
+        box-shadow: var(--shadow-sm) !important;
+        transition: box-shadow var(--tr), transform var(--tr);
+        overflow: hidden;
+    }
+
+        .book-card:hover {
+            box-shadow: var(--shadow-md) !important;
+            transform: translateY(-3px);
+        }
+
+        .book-card .card-body {
+            padding: 1.25rem 1.25rem 0.75rem;
+        }
+
+    .book-card-title {
+        font-family: var(--font-display);
+        font-size: 1.08rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+    }
+
+    .book-card-text {
+        font-size: 0.9rem;
+        color: var(--text-2);
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    .book-card .card-footer {
+        background: var(--bg-alt) !important;
+        border-top: 1px solid var(--border) !important;
+        padding: 0.75rem 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .book-card-date {
+        font-size: 0.78rem;
+        color: var(--text-3);
+    }
+
+    .btn-card {
+        font-family: var(--font-body);
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 0.32rem 0.85rem;
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        text-decoration: none;
+        transition: background var(--tr), color var(--tr), border-color var(--tr);
+    }
+
+        .btn-card:hover {
+            background: var(--text);
+            color: var(--white);
+            border-color: var(--text);
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 5rem 0;
+        color: var(--text-3);
+        font-size: 0.95rem;
+    }
+</style>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="hero-content">
+        <p class="hero-eyebrow">Discover Your Next Read</p>
+        <h1 class="hero-heading">Where every book sparks a conversation</h1>
+        <p class="hero-sub">
+            Browse, review, and share your favorite reads with a community of passionate readers.
+            Your personal library, reimagined.
+        </p>
+        <div class="hero-actions">
+            <a asp-area="" asp-controller="Home" asp-action="Catalogue" class="btn-hero-dark">
+                Browse Catalogue &rarr;
+            </a>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn-hero-ghost">
+                Join Free
+            </a>
+        </div>
+    </div>
+    <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=900&auto=format&fit=crop&q=80"
+             alt="Stack of books" />
+    </div>
+</section>
+
+<!-- ── Library ─────────────────────────────────────────────── -->
+<div class="section-header">
+    <h2 class="section-title">Library</h2>
+    <hr class="section-rule" />
+    <p class="section-sub">Browse the catalogue</p>
 </div>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-	@foreach (var book in Model)
-	{
-		<div class="col">
-			<div class="card h-100 border-0 shadow-sm">
-				<div class="card-body">
-					<h5 class="card-title fw-bold">@book.Title</h5>
-					<p class="card-text text-muted" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-						@book.Description
-					</p>
-				</div>
-				<div class="card-footer bg-transparent border-top-0 pb-3">
-					<div class="d-flex justify-content-between align-items-center">
-						<small class="text-muted">Published: @book.PublishedDate.ToString()</small>
-						<a asp-action="Details" asp-route-id="@book.Id" class="btn btn-sm btn-outline-primary">View Details</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	}
-</div>
-
-@if (!Model.Any())
+@if (Model.Any())
 {
-	<div class="text-center py-5">
-		<p class="text-muted">No books found in the library yet.</p>
-	</div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var book in Model)
+        {
+            <div class="col">
+                <div class="card book-card h-100">
+                    <div class="card-body">
+                        <h5 class="book-card-title">@book.Title</h5>
+                        <p class="book-card-text">@book.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="book-card-date">Published: @book.PublishedDate</span>
+                        <a asp-action="Details" asp-route-id="@book.Id" class="btn-card">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }
-
+else
+{
+    <div class="empty-state">
+        <p>No books found in the library yet.</p>
+    </div>
+}
