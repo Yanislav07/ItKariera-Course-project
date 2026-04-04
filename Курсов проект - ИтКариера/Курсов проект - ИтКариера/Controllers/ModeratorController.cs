@@ -35,17 +35,6 @@ namespace Курсов_проект___ИтКариера.Controllers
 
             // Add book first
             _context.Books.Add(model.Book);
-            await _context.SaveChangesAsync();
-
-            // Add authors
-            foreach (var authorId in model.SelectedAuthorIds)
-            {
-                _context.BookAuthors.Add(new BookAuthor
-                {
-                    BookId = model.Book.Id,
-                    UserId = authorId
-                });
-            }
 
             // Add categories
             foreach (var categoryId in model.SelectedCategoryIds)
@@ -65,12 +54,6 @@ namespace Курсов_проект___ИтКариера.Controllers
 
         private void PopulateLists(BookViewModel model)
         {
-            model.AuthorList = _context.Users
-                .Select(u => new SelectListItem
-                {
-                    Value = u.Id.ToString(),
-                    Text = u.UserName
-                }).ToList();
 
             model.CategoryList = _context.Categories
                 .Select(c => new SelectListItem

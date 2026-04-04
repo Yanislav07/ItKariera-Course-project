@@ -385,9 +385,9 @@
     <h1 class="book-title">@Model.Title</h1>
     <p class="book-subtitle-line">
         Published @Model.PublishedDate
-        @if (Model.BookAuthors != null && Model.BookAuthors.Any())
+        @if (!string.IsNullOrEmpty(Model.AuthorName))
         {
-            <text> &mdash; @string.Join(", ", Model.BookAuthors.Select(a => a.User))</text>
+            <text> &mdash; @Model.AuthorName</text>
         }
     </p>
 
@@ -400,10 +400,10 @@
             <h2 class="sec-heading">Description</h2>
             <p class="detail-body">@Model.Description</p>
 
-            @if (Model.BookAuthors != null && Model.BookAuthors.Any())
+            @if (!string.IsNullOrEmpty(Model.AuthorName))
             {
-                <h2 class="sec-heading">Authors</h2>
-                <p class="detail-body">@string.Join(", ", Model.BookAuthors.Select(a => a.User))</p>
+                <h2 class="sec-heading">Author</h2>
+                <p class="detail-body">@Model.AuthorName</p>
             }
 
             <!-- Reviews -->
@@ -493,11 +493,11 @@
                     <span class="info-val">@Model.PublishedDate</span>
                 </div>
 
-                @if (Model.BookAuthors != null && Model.BookAuthors.Any())
+                @if (!string.IsNullOrEmpty(Model.AuthorName))
                 {
                     <div class="info-row">
-                        <span class="info-key">Author@(Model.BookAuthors.Count() > 1 ? "s" : "")</span>
-                        <span class="info-val">@string.Join(", ", Model.BookAuthors.Select(a => a.User))</span>
+                        <span class="info-key">Author</span>
+                        <span class="info-val">@Model.AuthorName</span>
                     </div>
                 }
 

@@ -7,6 +7,7 @@
         public string? Title { get; set; }
         public string Description { get; set; }
         public DateTime? PublishedDate { get; set; }
+        public string AuthorName { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

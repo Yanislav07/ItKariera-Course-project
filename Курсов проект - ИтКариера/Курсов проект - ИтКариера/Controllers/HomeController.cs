@@ -49,7 +49,7 @@ namespace Курсов_проект___ИтКариера.Controllers
             // Filtering logic: These only run if the user actually selected something in the UI.
             if (!string.IsNullOrEmpty(author))
             {
-                query = query.Where(b => b.BookAuthors.Any(ba => ba.User.UserName.Contains(author)));
+                query = query.Where(b => b.AuthorName != null && b.AuthorName.Contains(author));
             }
 
             if (year.HasValue)

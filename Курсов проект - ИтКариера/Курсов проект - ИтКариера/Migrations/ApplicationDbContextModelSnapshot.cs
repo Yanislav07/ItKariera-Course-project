@@ -174,7 +174,7 @@ namespace Курсов_проект___ИтКариера.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("Курсов_проект___ИтКариера.Data.BookAuthor", b =>
@@ -189,7 +189,7 @@ namespace Курсов_проект___ИтКариера.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BookAuthors");
+                    b.ToTable("BookAuthors", (string)null);
                 });
 
             modelBuilder.Entity("Курсов_проект___ИтКариера.Data.BookCategory", b =>
@@ -204,7 +204,7 @@ namespace Курсов_проект___ИтКариера.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("BookCategories");
+                    b.ToTable("BookCategories", (string)null);
                 });
 
             modelBuilder.Entity("Курсов_проект___ИтКариера.Data.Category", b =>
@@ -219,7 +219,7 @@ namespace Курсов_проект___ИтКариера.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Курсов_проект___ИтКариера.Data.Favorite", b =>
@@ -234,7 +234,7 @@ namespace Курсов_проект___ИтКариера.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("Favorites", (string)null);
                 });
 
             modelBuilder.Entity("Курсов_проект___ИтКариера.Data.Review", b =>
@@ -266,7 +266,7 @@ namespace Курсов_проект___ИтКариера.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Курсов_проект___ИтКариера.Data.User", b =>
