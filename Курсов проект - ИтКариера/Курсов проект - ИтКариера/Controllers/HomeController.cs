@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -36,10 +37,55 @@ namespace Курсов_проект___ИтКариера.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<IActionResult> Catalogue()
+        public async Task<IActionResult> Catalogue(string? author, int? year, Guid? categoryId, double? minRating)
         {
-            var books = await _context.Books.ToListAsync();
-            return View(books);
+            // This starts the database query. 'Include' ensures we get the related data for Authors and Categories.
+            var query = _context.Books
+                .Include(b => b.BookAuthors).ThenInclude(ba => ba.User)
+                .Include(b => b.BookCategories).ThenInclude(bc => bc.Category)
+                .Include(b => b.Reviews)
+                .AsQueryable();
+
+            // Filtering logic: These only run if the user actually selected something in the UI.
+            if (!string.IsNullOrEmpty(author))
+            {
+                query = query.Where(b => b.BookAuthors.Any(ba => ba.User.UserName.Contains(author)));
+            }
+
+            if (year.HasValue)
+            {
+                query = query.Where(b => b.PublishedDate.HasValue && b.PublishedDate.Value.Year == year);
+            }
+
+            if (categoryId.HasValue)
+            {
+                query = query.Where(b => b.BookCategories.Any(bc => bc.CategoryId == categoryId));
+            }
+
+            if (minRating.HasValue)
+            {
+                // This calculates the average rating of all reviews for each book and compares it to the filter.
+                query = query.Where(b => b.Reviews.Any() ? b.Reviews.Average(r => r.Rating) >= minRating : false);
+            }
+
+            // This creates the data the View needs to build the dropdown menus.
+            var model = new BookFilterViewModel
+            {
+                Books = await query.ToListAsync(),
+                CategoryList = new SelectList(await _context.Categories.ToListAsync(), "Id", "Name", categoryId),
+                YearList = await _context.Books
+                    .Where(b => b.PublishedDate.HasValue)
+                    .Select(b => b.PublishedDate.Value.Year)
+                    .Distinct()
+                    .OrderByDescending(y => y)
+                    .ToListAsync(),
+                SearchAuthor = author,
+                SearchYear = year,
+                SearchCategoryId = categoryId,
+                MinRating = minRating
+            };
+
+            return View(model);
         }
 
         //Search Functionality
