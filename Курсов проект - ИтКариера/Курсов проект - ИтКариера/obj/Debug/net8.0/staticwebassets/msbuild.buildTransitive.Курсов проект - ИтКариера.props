@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Курсов проект - ИтКариера.props" />
-</Project>
