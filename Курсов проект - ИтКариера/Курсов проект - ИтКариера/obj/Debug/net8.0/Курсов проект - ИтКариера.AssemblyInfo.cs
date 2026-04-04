@@ -11,12 +11,11 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-Курсов_проект___ИтКариера-7ebd9eaa-4f1c-4940-b57d-a20a51ab14a6")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Курсов проект - ИтКариера")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee9302577d837d174474fb3577e5271a941a44f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0af26b7a6145ba77c334dbe39c4222272baa10fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("Курсов проект - ИтКариера")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Курсов проект - ИтКариера")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
