@@ -49,7 +49,7 @@ namespace Курсов_проект___ИтКариера.Controllers
             // Filtering logic: These only run if the user actually selected something in the UI.
             if (!string.IsNullOrEmpty(author))
             {
-                query = query.Where(b => b.BookAuthors.Any(ba => ba.User.UserName.Contains(author)));
+                query = query.Where(b => b.AuthorName != null && b.AuthorName.Contains(author));
             }
 
             if (year.HasValue)
@@ -109,6 +109,15 @@ namespace Курсов_проект___ИтКариера.Controllers
             if (book == null)
             {
                 return NotFound();
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId != null)
+            {
+                ViewBag.UserLists = await _context.ReadingLists
+                    .Where(l => l.UserId == Guid.Parse(userId))
+                    .ToListAsync();
             }
 
             return View(book);
@@ -227,8 +236,92 @@ namespace Курсов_проект___ИтКариера.Controllers
 
             return View(favoriteBooks);
         }
-    
 
+        [Authorize]
+        public async Task<IActionResult> MyLists()
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+            var favList = await _context.ReadingLists
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.Name == "Favorites");
+            if (favList == null)
+            {
+                _context.ReadingLists.Add(new ReadingList { Name = "Favorites", UserId = userId });
+                await _context.SaveChangesAsync();
+            }
+
+            var lists = await _context.ReadingLists
+                .Where(l => l.UserId == userId)
+                .Include(l => l.ReadingListBooks)
+                    .ThenInclude(rlb => rlb.Book)
+                .OrderBy(l => l.Name != "Favorites") 
+                .ToListAsync();
+
+            return View(lists);
+        }
+
+        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateList(string name, Guid bookId)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var list = new ReadingList { Name = name, UserId = userId };
+            _context.ReadingLists.Add(list);
+            await _context.SaveChangesAsync();
+
+            if (bookId != Guid.Empty)
+            {
+                _context.ReadingListBooks.Add(new ReadingListBook { ReadingListId = list.Id, BookId = bookId });
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = bookId });
+            }
+
+            return RedirectToAction("MyLists");
+        }
+
+        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToList(Guid bookId, Guid listId)
+        {
+            var exists = await _context.ReadingListBooks
+                .AnyAsync(x => x.BookId == bookId && x.ReadingListId == listId);
+            if (!exists)
+            {
+                _context.ReadingListBooks.Add(new ReadingListBook { BookId = bookId, ReadingListId = listId });
+                await _context.SaveChangesAsync();
+                TempData["ListMessage"] = "Added to list!";
+            }
+            else
+            {
+                TempData["ListMessage"] = "Book is already in this list.";
+            }
+            return RedirectToAction("Details", new { id = bookId });
+        }
+
+        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveFromList(Guid bookId, Guid listId)
+        {
+            var entry = await _context.ReadingListBooks
+                .FirstOrDefaultAsync(x => x.BookId == bookId && x.ReadingListId == listId);
+            if (entry != null)
+            {
+                _context.ReadingListBooks.Remove(entry);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("MyLists");
+        }
+
+        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteList(Guid listId)
+        {
+            var list = await _context.ReadingLists
+                .Include(l => l.ReadingListBooks)
+                .FirstOrDefaultAsync(l => l.Id == listId);
+            if (list != null)
+            {
+                _context.ReadingListBooks.RemoveRange(list.ReadingListBooks);
+                _context.ReadingLists.Remove(list);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("MyLists");
+        }
     }
 }

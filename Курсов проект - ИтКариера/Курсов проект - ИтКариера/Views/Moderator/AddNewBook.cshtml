@@ -86,19 +86,17 @@
                           class="text-danger small"></span>
                 </div>
 
-                <!-- AUTHORS (Multi Select) -->
+                <!-- AUTHOR -->
                 <div class="mb-3">
-                    <label class="form-label fw-semibold small text-muted text-uppercase">
-                        Authors
+                    <label asp-for="Book.AuthorName"
+                           class="form-label fw-semibold small text-muted text-uppercase"
+                           style="letter-spacing: 0.03em;">
+                        Author
                     </label>
-
-                    <select asp-for="SelectedAuthorIds"
-                            asp-items="Model.AuthorList"
-                            class="form-select"
-                            multiple>
-                    </select>
-
-                    <span asp-validation-for="SelectedAuthorIds"
+                    <input asp-for="Book.AuthorName"
+                           class="form-control"
+                           placeholder="Enter author name" />
+                    <span asp-validation-for="Book.AuthorName"
                           class="text-danger small"></span>
                 </div>
 

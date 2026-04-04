@@ -1,0 +1,160 @@
+﻿@using Курсов_проект___ИтКариера.Data
+@model List<ReadingList>
+
+@{
+    ViewData["Title"] = "My Lists";
+}
+
+<style>
+    .lists-wrap {
+        padding: 2.5rem 0 4rem;
+    }
+
+    .lists-title {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        border-bottom: 2px solid var(--border-dark);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .list-create {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+        .list-create input {
+            flex: 1;
+            padding: 0.5rem 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            background: var(--bg-alt);
+            font-size: 0.85rem;
+        }
+
+    .list-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-top: 3px solid var(--border-dark);
+        border-radius: var(--r);
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-alt);
+    }
+
+    .list-name {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+    }
+
+    .list-books {
+        padding: 0.75rem 1rem;
+    }
+
+    .book-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.45rem 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.9rem;
+    }
+
+        .book-row:last-child {
+            border-bottom: none;
+        }
+
+    .book-title {
+        color: var(--text);
+    }
+
+    .empty {
+        font-size: 0.85rem;
+        color: var(--text-3);
+        font-style: italic;
+        padding: 0.5rem 0;
+    }
+</style>
+
+<div class="lists-wrap">
+
+    <h2 class="lists-title">My Lists</h2>
+
+    @if (TempData["ListMessage"] != null)
+    {
+        <div class="fav-alert">
+            <span>@TempData["ListMessage"]</span>
+            <button onclick="this.parentElement.remove()">&#x2715;</button>
+        </div>
+    }
+
+    <!-- Create list -->
+    <form asp-action="CreateList" method="post" class="list-create">
+        <input type="text" name="name" placeholder="New list name..." required />
+        <button type="submit" class="btn-fav-add">Create</button>
+    </form>
+
+    @foreach (var list in Model)
+    {
+        <div class="list-card">
+
+            <div class="list-header">
+                <span class="list-name">@list.Name</span>
+
+                @if (list.Name != "Favorites")
+                {
+                    <form asp-action="DeleteList" method="post">
+                        <input type="hidden" name="listId" value="@list.Id" />
+                        <button type="submit" class="btn-delete"
+                                onclick="return confirm('Delete this list?');">
+                            Delete
+                        </button>
+                    </form>
+                }
+            </div>
+
+            <div class="list-books">
+
+                @if (list.ReadingListBooks != null && list.ReadingListBooks.Any())
+                {
+                    @foreach (var item in list.ReadingListBooks)
+                    {
+                        <div class="book-row">
+
+                            <span class="book-title">
+                                <a asp-action="Details" asp-route-id="@item.BookId">
+                                    @item.Book.Title
+                                </a>
+                            </span>
+
+                            <form asp-action="RemoveFromList" method="post">
+                                <input type="hidden" name="bookId" value="@item.BookId" />
+                                <input type="hidden" name="listId" value="@list.Id" />
+                                <button type="submit" class="btn-review-delete">
+                                    Remove
+                                </button>
+                            </form>
+
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="empty">No books in this list yet.</div>
+                }
+
+            </div>
+
+        </div>
+    }
+
+</div>
