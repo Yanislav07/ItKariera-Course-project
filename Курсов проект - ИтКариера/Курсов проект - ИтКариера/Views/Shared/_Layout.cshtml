@@ -273,11 +273,11 @@
                         <li class="nav-item">
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a class="nav-link" asp-controller="Home" asp-action="Favorites">Favorites</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="MyLists">My Lists</a>
                             }
                             else
                             {
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Favorites</a>
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">My Lists</a>
                             }
                         </li>
                         @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))

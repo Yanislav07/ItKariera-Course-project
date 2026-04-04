@@ -373,6 +373,14 @@
         </div>
     }
 
+    @if (TempData["ListMessage"] != null)
+    {
+        <div class="fav-alert">
+            <span>@TempData["ListMessage"]</span>
+            <button onclick="this.parentElement.remove()">&#x2715;</button>
+        </div>
+    }
+
     <!-- Back -->
     <a asp-action="Catalogue" class="back-link">
         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
@@ -542,6 +550,39 @@
                                 <button type="submit" class="btn-fav-add">&#9825; Add to Favorites</button>
                             }
                         </form>
+
+                        <hr style="border:none;border-top:1px solid var(--border);margin:0.5rem 0;" />
+
+                        <!-- Create new list -->
+                        <form asp-action="CreateList" asp-controller="Home" method="post">
+                            <input type="hidden" name="bookId" value="@Model.Id" />
+                            <input type="text" name="name"
+                                   placeholder="New list..."
+                                   style="width:100%;padding:0.45rem 0.6rem;margin-bottom:0.4rem;
+                      border:1px solid var(--border);border-radius:var(--r);
+                      font-size:0.8rem;background:var(--bg-alt);" required />
+                            <button type="submit" class="btn-fav-add">+ Create List</button>
+                        </form>
+
+                        <!-- Add to existing list -->
+                        @if (ViewBag.UserLists != null && ((List<ReadingList>)ViewBag.UserLists).Any())
+                        {
+                            <form asp-action="AddToList" asp-controller="Home" method="post" style="margin-top:0.4rem;">
+                                <input type="hidden" name="bookId" value="@Model.Id" />
+
+                                <select name="listId"
+                                        style="width:100%;padding:0.45rem 0.6rem;margin-bottom:0.4rem;
+                               border:1px solid var(--border);border-radius:var(--r);
+                               font-size:0.8rem;background:var(--bg-alt);">
+                                    @foreach (var list in (List<ReadingList>)ViewBag.UserLists)
+                                    {
+                                        <option value="@list.Id">@list.Name</option>
+                                    }
+                                </select>
+
+                                <button type="submit" class="btn-fav-remove">Add to List</button>
+                            </form>
+                        }
 
                         @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                         {
